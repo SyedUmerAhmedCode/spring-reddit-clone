@@ -14,7 +14,7 @@ import com.umer.springredditclone.service.AuthService;
 import lombok.AllArgsConstructor;
 
 @RestController
-//@RequestMapping(path= "/api/auth")
+@RequestMapping(path= "/api/auth")
 @AllArgsConstructor
 public class AuthController {
 
