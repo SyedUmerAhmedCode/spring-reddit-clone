@@ -10,6 +10,6 @@ import com.umer.springredditclone.model.Subreddit;
 @Repository
 public interface SubredditRepository extends JpaRepository<Subreddit, Long>{
 	
-	Optional<Subreddit> findByName(String subredditName);
+	Optional<Subreddit> findByName(String subredditName); 
 
 }

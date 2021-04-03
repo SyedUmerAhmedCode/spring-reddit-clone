@@ -36,7 +36,7 @@ public class AuthService {
 
 	@Transactional
 	public void signup(RegisterRequest registerRequest) {
-		User user = new User();
+		User user = new User(); 
 		user.setUsername(registerRequest.getUsername());
 		user.setEmail(registerRequest.getEmail());
 		user.setPassword(encodePassword(registerRequest.getPassword()));

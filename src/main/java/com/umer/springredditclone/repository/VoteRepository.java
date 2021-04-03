@@ -10,6 +10,6 @@ import com.umer.springredditclone.model.Vote;
 
 public interface VoteRepository extends JpaRepository<Vote, Long>{
 	
-//	Optional<Vote> FindTopByPostAndUserOrderByVoteIdDesc(Post post, User currentUser);
+//	Optional<Vote> FindTopByPostAndUserOrderByVoteIdDesc(Post post, User currentUser); 
 
 }

@@ -12,7 +12,7 @@ import com.umer.springredditclone.model.User;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 	
-	List<Comment> findByPost(Post post);
+	List<Comment> findByPost(Post post); 
 	
 	List<Comment> findByUser(User user);
 

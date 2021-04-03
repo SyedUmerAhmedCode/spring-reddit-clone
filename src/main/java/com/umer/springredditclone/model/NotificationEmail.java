@@ -12,7 +12,7 @@ public class NotificationEmail {
 	public String subject;
 	
 	public String recipient;
-	
+	 
 	public String body;
 
 }

@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.antMatchers(HttpMethod.GET, "/api/subreddit")
                 .permitAll()
-				.anyRequest()
+				.anyRequest() 
 				.authenticated();
 	}
 

@@ -28,7 +28,6 @@ public class AuthController {
 
 	}
 
-//	@RequestMapping(method = RequestMethod.GET)
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String healthCheck() {
 		return "ping pong";
