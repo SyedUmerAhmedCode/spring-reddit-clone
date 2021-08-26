@@ -1,15 +1,16 @@
 package com.umer.springredditclone.service;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.umer.springredditclone.dto.RegisterRequest;
+import com.umer.springredditclone.exceptions.SpringRedditException;
 import com.umer.springredditclone.model.NotificationEmail;
 import com.umer.springredditclone.model.User;
 import com.umer.springredditclone.model.VerificationToken;
@@ -76,5 +77,21 @@ public class AuthService {
 	private String encodePassword(String password) {
 		return passwordEncoder.encode(password);
 	}
+
+	public void verifyAccount(String token) {
+		final Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
+		verificationToken.orElseThrow(()-> new SpringRedditException("Invalid Token"));
+		fetchUserAndEnable(verificationToken.get());
+		
+	}
+
+	@Transactional
+	private void fetchUserAndEnable(VerificationToken verificationToken) {
+		String username=verificationToken.getUser().getUsername();
+		User user=userRepository.findByUsername(username).orElseThrow(()->new SpringRedditException("UIser not found with name: "+username));
+		user.setEnabled(true);
+		userRepository.save(user);		
+	}
+	
 
 }
