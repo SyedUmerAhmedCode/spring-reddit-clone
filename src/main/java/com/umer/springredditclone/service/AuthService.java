@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +31,16 @@ public class AuthService {
 	private final String CONTEXT_PATH = "/api/auth/";
 
 	private final UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder;
+
+ 	private final PasswordEncoder passwordEncoder;
+	
 	private final VerificationTokenRepository verificationTokenRepository;
+	
 	private final MailService mailService;
 
 	@Transactional
 	public void signup(RegisterRequest registerRequest) {
-		User user = new User(); 
+		User user = new User();
 		user.setUsername(registerRequest.getUsername());
 		user.setEmail(registerRequest.getEmail());
 		user.setPassword(encodePassword(registerRequest.getPassword()));
@@ -54,8 +58,8 @@ public class AuthService {
 		 * "http://localhost:8080/api/auth/accountVerification/" + token;
 		 */
 		final String emailBody = "Thank you for signing up to Spring Reddit, "
-				+ "please click on the below url to activate your account : " 
-				+ HTTP_PROTOCOL + HOST + ":" + PORT + CONTEXT_PATH + "accountVerification/" + token;
+				+ "please click on the below url to activate your account : " + HTTP_PROTOCOL + HOST + ":" + PORT
+				+ CONTEXT_PATH + "accountVerification/" + token;
 		NotificationEmail notificationEmail = new NotificationEmail(subject, recipientEmail, emailBody);
 		mailService.sendMail(notificationEmail);
 	}
