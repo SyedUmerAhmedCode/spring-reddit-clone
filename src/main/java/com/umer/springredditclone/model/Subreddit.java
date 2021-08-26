@@ -28,10 +28,10 @@ public class Subreddit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
 	
-	@NotBlank(message="Community name is required")
+	@NotBlank(message="Community name is required.")
 	private String name;
 	
-	@NotBlank(message="Description is required")
+	@NotBlank(message="Description is required.")
 	private String description;
 	
 	@OneToMany(fetch=FetchType.LAZY)
