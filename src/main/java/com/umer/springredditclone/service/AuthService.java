@@ -26,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class AuthService {
 
+	private static final String USER_NOT_FOUND_WITH_NAME = "User not found with name: ";
+	private static final String INVALID_TOKEN = "Invalid Token";
 	private final String HTTP_PROTOCOL = "http://";
 	private final String HOST = "localhost";
 	private final String PORT = "8080";
@@ -80,7 +82,7 @@ public class AuthService {
 
 	public void verifyAccount(String token) {
 		final Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-		verificationToken.orElseThrow(()-> new SpringRedditException("Invalid Token"));
+		verificationToken.orElseThrow(()-> new SpringRedditException(INVALID_TOKEN));
 		fetchUserAndEnable(verificationToken.get());
 		
 	}
@@ -88,10 +90,9 @@ public class AuthService {
 	@Transactional
 	private void fetchUserAndEnable(VerificationToken verificationToken) {
 		String username=verificationToken.getUser().getUsername();
-		User user=userRepository.findByUsername(username).orElseThrow(()->new SpringRedditException("UIser not found with name: "+username));
+		User user=userRepository.findByUsername(username).orElseThrow(()->new SpringRedditException(USER_NOT_FOUND_WITH_NAME+username));
 		user.setEnabled(true);
 		userRepository.save(user);		
 	}
 	
-
 }
