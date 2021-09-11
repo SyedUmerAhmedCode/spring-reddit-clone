@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +36,10 @@ public class AuthService {
 	private final String CONTEXT_PATH = "/api/auth/";
 
 	private final UserRepository userRepository;
-
- 	private final PasswordEncoder passwordEncoder;
-	
-	private final VerificationTokenRepository verificationTokenRepository;
-	
+ 	private final PasswordEncoder passwordEncoder;	
+	private final VerificationTokenRepository verificationTokenRepository;	
 	private final MailService mailService;
+	private final AuthenticationManager authenticationManager; 
 
 	@Transactional
 	public void signup(RegisterRequest registerRequest) {
