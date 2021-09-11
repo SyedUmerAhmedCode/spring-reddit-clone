@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.umer.springredditclone.dto.LoginRequest;
 import com.umer.springredditclone.dto.RegisterRequest;
 import com.umer.springredditclone.exceptions.SpringRedditException;
 import com.umer.springredditclone.model.NotificationEmail;
@@ -83,8 +84,7 @@ public class AuthService {
 	public void verifyAccount(String token) {
 		final Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
 		verificationToken.orElseThrow(()-> new SpringRedditException(INVALID_TOKEN));
-		fetchUserAndEnable(verificationToken.get());
-		
+		fetchUserAndEnable(verificationToken.get());		
 	}
 
 	@Transactional
@@ -94,5 +94,8 @@ public class AuthService {
 		user.setEnabled(true);
 		userRepository.save(user);		
 	}
-	
+
+	public void login(LoginRequest loginRequest) {
+		
+	}
 }
