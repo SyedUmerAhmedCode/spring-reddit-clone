@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +96,8 @@ public class AuthService {
 	}
 
 	public void login(LoginRequest loginRequest) {
-		
+		authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), 
+						loginRequest.getPassword()));
 	}
 }
