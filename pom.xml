@@ -17,37 +17,20 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<jjwt-api.version>0.10.5</jjwt-api.version>
+		<jjwt-impl.version>0.10.5</jjwt-impl.version>
+		<jjwt-jackson.version>0.10.5</jjwt-jackson.version>
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
+		<timeago.version>4.0.1</timeago.version>
 	</properties>
 
 	<dependencies>
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-data-jpa</artifactId> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-mail</artifactId> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-security</artifactId> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-web</artifactId> -->
-		<!-- </dependency> -->
-
 		<!-- <dependency> -->
 		<!-- <groupId>com.microsoft.sqlserver</groupId> -->
 		<!-- <artifactId>mssql-jdbc</artifactId> -->
 		<!-- <scope>runtime</scope> -->
 		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.projectlombok</groupId> -->
-		<!-- <artifactId>lombok</artifactId> -->
-		<!-- <optional>true</optional> -->
-		<!-- </dependency> -->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -59,7 +42,6 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version>
 		</dependency>
 
 		<dependency>
@@ -79,7 +61,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.8</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -100,19 +81,19 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
-			<version>0.10.5</version>
+			<version>${jjwt-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<scope>runtime</scope>
-			<version>0.10.5</version>
+			<version>${jjwt-impl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
 			<scope>runtime</scope>
-			<version>0.10.5</version>
+			<version>${jjwt-jackson.version}</version>
 		</dependency>
 		<!-- <dependency> <groupId>org.mapstruct</groupId> <artifactId>mapstruct</artifactId> 
 			<version>${org.mapstruct.version}</version> <scope>compile</scope> </dependency> -->
@@ -120,19 +101,19 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
+			<version>${springfox-swagger2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<version>${springfox-swagger-ui.version}</version>
 		</dependency>
 		<!-- For Displaying time as Relative Time Ago ("Posted 1 Day ago"), as 
 			this is a Kotlin library, we also need Kotlin runtime libraries -->
 		<dependency>
 			<groupId>com.github.marlonlom</groupId>
 			<artifactId>timeago</artifactId>
-			<version>4.0.1</version>
+			<version>${timeago.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
@@ -166,11 +147,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-<!-- 				<configuration> -->
-<!-- 					<jvmArguments> -->
-<!-- 						-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 -->
-<!-- 					</jvmArguments> -->
-<!-- 				</configuration> -->
+				<!-- <configuration> -->
+				<!-- <jvmArguments> -->
+				<!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 -->
+				<!-- </jvmArguments> -->
+				<!-- </configuration> -->
 			</plugin>
 		</plugins>
 	</build>
