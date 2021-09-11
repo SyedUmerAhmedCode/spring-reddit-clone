@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.umer.springredditclone.dto.AuthenticationResponse;
 import com.umer.springredditclone.dto.LoginRequest;
 import com.umer.springredditclone.dto.RegisterRequest;
 import com.umer.springredditclone.exceptions.SpringRedditException;
@@ -100,11 +101,11 @@ public class AuthService {
 		userRepository.save(user);		
 	}
 
-	public void login(LoginRequest loginRequest) {
+	public AuthenticationResponse login(LoginRequest loginRequest) {
 		final Authentication authenticate = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), 
-						loginRequest.getPassword()));
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authenticate);
-		String token=jwtProvider.generateToken(authenticate);
+		String token = jwtProvider.generateToken(authenticate);
+		return new AuthenticationResponse(token, loginRequest.getUsername());
 	}
 }
