@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import com.umer.springredditclone.model.User;
 import com.umer.springredditclone.model.VerificationToken;
 import com.umer.springredditclone.repository.UserRepository;
 import com.umer.springredditclone.repository.VerificationTokenRepository;
+import com.umer.springredditclone.security.JwtProvider;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +44,8 @@ public class AuthService {
 	private final VerificationTokenRepository verificationTokenRepository;	
 	private final MailService mailService;
 	private final AuthenticationManager authenticationManager; 
+	private final JwtProvider jwtProvider; 
+	
 
 	@Transactional
 	public void signup(RegisterRequest registerRequest) {
@@ -96,8 +101,10 @@ public class AuthService {
 	}
 
 	public void login(LoginRequest loginRequest) {
-		authenticationManager.authenticate(
+		final Authentication authenticate = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), 
 						loginRequest.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authenticate);
+		String token=jwtProvider.generateToken(authenticate);
 	}
 }
