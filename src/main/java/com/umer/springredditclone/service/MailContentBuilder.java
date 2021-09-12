@@ -11,12 +11,14 @@ import lombok.AllArgsConstructor;
 public class MailContentBuilder {
 	
 
+	private static final String MAIL_TEMPLATE = "mailTemplate";
+	private static final String MESSAGE = "message";
 	private final TemplateEngine templateEngine;
 	
 	String build(String message) {
 		Context context=new Context();
-		context.setVariable("message", message);
-		return templateEngine.process("mailTemplate", context); 
+		context.setVariable(MESSAGE, message);
+		return templateEngine.process(MAIL_TEMPLATE, context); 
 	}
 	
 	

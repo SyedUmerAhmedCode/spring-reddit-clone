@@ -21,6 +21,7 @@ import io.jsonwebtoken.Jwts;
 @Service
 public class JwtProvider {
 
+	private static final String AN_EXCEPTION_OCCURRED_WHILE_LOADING_KEY_STORE = "An exception occurred while loading key store";
 	private static final String KEYSTORE_PASSWORD = "secret";
 	private static final String KEYSTORE_ALIAS = "/springblog.jks";
 	private static final String JKS_KEYSTORE = "JKS";
@@ -33,7 +34,7 @@ public class JwtProvider {
 			InputStream resourceAsInputStream = getClass().getResourceAsStream(KEYSTORE_ALIAS);
 			keyStore.load(resourceAsInputStream, KEYSTORE_PASSWORD.toCharArray());
 		} catch (KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException e) {
-			throw new SpringRedditException("An exception occurred while loading key store" + e.getStackTrace());
+			throw new SpringRedditException(AN_EXCEPTION_OCCURRED_WHILE_LOADING_KEY_STORE + e.getStackTrace());
 		}
 	}
 
@@ -50,7 +51,7 @@ public class JwtProvider {
 		try {
 			return (PrivateKey)keyStore.getKey(KEYSTORE_ALIAS, KEYSTORE_PASSWORD.toCharArray());
 		} catch (UnrecoverableKeyException | KeyStoreException | NoSuchAlgorithmException e) {
-			throw new SpringRedditException("An exception occurred while loading key store" + e.getStackTrace());
+			throw new SpringRedditException(AN_EXCEPTION_OCCURRED_WHILE_LOADING_KEY_STORE + e.getStackTrace());
 		}		
 	}
 }

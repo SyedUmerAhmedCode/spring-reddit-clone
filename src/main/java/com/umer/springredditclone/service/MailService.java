@@ -18,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MailService {
 
+	private static final String EXCEPTION_OCCURRED_WHEN_SENDING_MAIL_TO = "Exception occurred when sending mail to ";
+	private static final String ACTIVATION_MAIL_SENT = "Activation mail sent!!";
+	private static final String SPRINGREDDIT_EMAIL_ADDRESS = "springreddit@email.com";
 	private final JavaMailSender mailSender;
 	private final MailContentBuilder mailContentBuilder;
 
@@ -26,18 +29,18 @@ public class MailService {
 
 		MimeMessagePreparator messagePreparator = mimeMessage -> {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-			messageHelper.setFrom("springreddit@email.com");
+			messageHelper.setFrom(SPRINGREDDIT_EMAIL_ADDRESS);
 			messageHelper.setTo(notificationEmail.getRecipient());
 			messageHelper.setSubject(notificationEmail.getSubject());
 			messageHelper.setText(mailContentBuilder.build(notificationEmail.getBody())); 
 		};
 		try {
 			mailSender.send(messagePreparator);
-			log.info("Activation mail sent!!");
+			log.info(ACTIVATION_MAIL_SENT);
 
 		} catch (MailException e) {
 			throw new SpringRedditException(
-					"Exception occurred when sending mail to " + notificationEmail.getRecipient());
+					EXCEPTION_OCCURRED_WHEN_SENDING_MAIL_TO + notificationEmail.getRecipient());
 		}
 
 	}

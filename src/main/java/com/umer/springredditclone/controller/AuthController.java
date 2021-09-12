@@ -22,12 +22,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthController {
 
+	private static final String ACCOUNT_ACTIVATED_SUCCESSFULLY = "Account activated successfully";
+	private static final String USER_REGISTRATION_SUCCESSFUL = "User registration successful.";
 	private final AuthService authService;
 
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
 		authService.signup(registerRequest);
-		final String responseBody = "User registration successful.";
+		final String responseBody = USER_REGISTRATION_SUCCESSFUL;
 		return new ResponseEntity<String>(responseBody, HttpStatus.OK);
 
 	}
@@ -40,7 +42,7 @@ public class AuthController {
 	@GetMapping("accountVerification/{token}")
 	public ResponseEntity<String> verifyAccount(@PathVariable String token) {
 		authService.verifyAccount(token);
-		return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
+		return new ResponseEntity<>(ACCOUNT_ACTIVATED_SUCCESSFULLY, HttpStatus.OK);
 	}
 
 	@PostMapping("/login")
