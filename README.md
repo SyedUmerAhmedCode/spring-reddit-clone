@@ -7,6 +7,7 @@
 - [Explanation System Design](#explanation-system-design)
 - [Technologies Used](#technologies-used)
 - [Commands](#commands)
+- [Contribution](#contribution)
 - [Contact Information](#contact-information)
 
 
@@ -46,6 +47,10 @@ To be defined.
 ## Commands
 
 To be defined.
+
+## Contribution
+
+Feature requests, issues, pull requests and questions are welcome.
  
 
 ## Contact Information
